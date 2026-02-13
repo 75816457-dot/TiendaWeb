@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lácteos Yovana | Tienda en Línea</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container" style="position: relative;"> 
+            <h1>PRODUCTOS LACTEOS: YOVANA</h1>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>Frescura del Campo a tu Mesa</h2>
+        <p>Productos artesanales - Cajamarca - 100% naturales.</p>
+    </section>
+
+    <div class="search-section">
+        <div class="search-container">
+            <input type="text" id="product-search" placeholder="🔍 Buscar productos..." onkeyup="filterProducts()">
+        </div>
+        <button class="btn-more-categories" onclick="toggleExtraMenu()">➕ Más Categorías</button>
+    </div>
+
+    <div id="extra-menu" class="extra-menu">
+        <div class="extra-menu-header">
+            <h3>Otras Categorías</h3>
+            <button class="close-icon" onclick="toggleExtraMenu()">×</button>
+        </div>
+        <div class="extra-menu-body">
+            <div class="category-card" onclick="cargarCategoria('lacteos')">
+                <span>🥛</span>
+                <p>Lácteos</p>
+            </div>
+            <div class="category-card" onclick="cargarCategoria('ropa')">
+                <span>👕</span>
+                <p>Ropa y Calzado</p>
+            </div>
+            <div class="category-card" onclick="cargarCategoria('hogar')">
+                <span>🏠</span>
+                <p>Hogar</p>
+            </div>
+            <div class="category-card" onclick="cargarCategoria('ferreteria')">
+                <span>⚙️</span>
+                <p>Ferretería</p>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="product-grid" id="product-grid">
+            </div>
+    </main>
+
+    <section class="hero-info">
+        <div class="info-overlay">
+            <h2>Ubícanos y Haz tu Pedido</h2>
+            <p>📍 Dirección: Calle Principal 123, Cajamarca</p>
+            <p>📞 WhatsApp: 916 992 293</p>
+            <p>⏰ Horario: Lunes a Sábado - 8:00 AM a 6:00 PM</p>
+        </div>
+    </section>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Pedido</h3>
+            <button class="close-icon" onclick="toggleCart()">×</button>
+        </div>
+        <div id="cart-items-container" class="cart-body"></div>
+        <div class="cart-footer">
+            <div class="total-container">
+                <span>Total:</span>
+                <span id="total-price">$0.00</span>
+            </div>
+            <button class="btn-whatsapp" onclick="sendWhatsApp()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="wa" width="20">
+                Pedir por WhatsApp
+            </button>
+            <button class="btn-clear" onclick="toggleCart()">Continuar comprando</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
