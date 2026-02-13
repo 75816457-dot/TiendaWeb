@@ -1,0 +1,663 @@
+:root {
+    --primary: #a9d0fa;
+    --dark: #333;
+    --light: #0896a2fb;
+    --white: lab(85.9% -24.43 -12.78);
+}
+/* Aplicar la nueva fuente a todo el sitio */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #cdeaf1;
+}
+
+header {
+    background-color: #a1d6eb; /* El celeste que elegiste */
+    padding: 20px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+header .container {
+    display: flex;
+    flex-direction: column; /* Pone el título arriba y el carrito abajo (o viceversa) */
+    align-items: center;    /* Centra todo horizontalmente */
+    justify-content: center;
+    position: relative;     /* Para poder ubicar el carrito mejor */
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.2rem;      /* Tamaño más grande */
+    color: #003366;         /* Un azul oscuro para que resalte en el celeste */
+    text-transform: uppercase; /* Todo en mayúsculas */
+    letter-spacing: 2px;    /* Espacio entre letras para elegancia */
+    text-align: center;
+    font-weight: 700;       /* Negrita fuerte */
+}
+
+/* Para que el icono del carrito no se mueva del lugar */
+.cart-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.hero {
+    background: linear-gradient(rgba(0,123,255,0.1), rgba(0,123,255,0.1)), url('https://static.vecteezy.com/system/resources/previews/027/100/946/large_2x/dairy-products-including-milk-cottage-cheese-and-eggs-placed-on-a-blue-background-the-view-free-photo.jpg');
+    background-size: cover;
+    text-align: center; padding: 4rem 1rem;
+}
+
+.product-grid {
+    display: grid;
+    /* Esto crea columnas de al menos 250px y las que quepan en la pantalla */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 30px;
+    padding: 20px 0;
+    .product-grid {
+    justify-items: center; /* Centra las tarjetas dentro de sus columnas */
+    align-items: start;
+}
+}
+
+.side-cart {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Escondido por defecto */
+    width: 350px;
+    height: 100%;
+    background: white;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: 0.5s;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-cart.active {
+    right: 0; /* Se muestra cuando activas la clase */
+}
+
+
+.product-card img {
+    width: 100%;
+    height: 200px; /* Ajusta esta altura a tu gusto */
+    object-fit: contain; /* Esto hace que la imagen quepa sin cortarse */
+    border-radius: 8%;
+    margin-bottom: 10px;
+
+    /* ESTO ES LO NUEVO */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empuja el contenido para llenar el espacio */
+    height: 100%; /* Asegura que todas midan lo mismo en la misma fila */
+}
+
+.product-card {
+    background-color: #66c7d0; /* Cambiamos a blanco para que resalte sobre el fondo celeste */
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #2545e7; /* Un borde azul fino */
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* DISEÑO DEL CARRITO MODERNO */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Escondido */
+    width: 350px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.active {
+    right: 0; /* Aparece */
+}
+
+.cart-header {
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-icon {
+    background: #f5f5f5;
+    border: none;
+    font-size: 24px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.cart-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* Tarjetas de productos dentro del carrito */
+.cart-item-card {
+    background: #f8fbff;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #eef2f7;
+}
+
+.cart-footer {
+    padding: 20px;
+    background: #fff;
+    border-top: 1px solid #f0f0f0;
+}
+
+.total-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+/* --- BOTONES DEL CARRITO LATERAL --- */
+.btn-whatsapp {
+    background: #25d366;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.btn-whatsapp:hover {
+    background: #1eb954;
+}
+
+.btn-clear {
+    background: transparent;
+    color: #888;
+    border: none;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* --- ESTILO PARA LOS BOTONES DE PRODUCTOS (CORREGIDO) --- */
+.btn-add {
+    background-color: #007bff !important; /* Azul vibrante */
+    color: white !important;
+    border: none !important;
+    padding: 12px 20px !important;
+    border-radius: 10px !important;
+    font-weight: bold !important;
+    font-size: 0.9rem !important;
+    cursor: pointer !important;
+    width: 90% !important;
+    margin: 15px auto 5px auto !important;
+    display: block !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    text-align: center;
+}
+
+.btn-add:hover {
+    background-color: #0056b3 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* --- TARJETAS DE PRODUCTOS --- */
+.product-card {
+    background-color: #75e5ef; 
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #125ac6;
+    transition: 0.3s;
+    min-height: 420px; /* Para que todas las tarjetas midan igual */
+
+
+}
+
+/* Efecto cuando haces clic */
+.btn-add:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+/* Esta clase se añade con JavaScript para mostrarlo */
+.cart-sidebar.active {
+    right: 0; /* Se desliza hacia adentro */
+}
+
+/* Estilo para los productos dentro del carrito */
+#cart-items p {
+    border-bottom: 1px solid #0e76d7;
+    padding: 10px 0;
+    margin: 0;
+    font-size: 0.9rem;
+}
+/* --- ESTILO PARA EL TÍTULO Y HEADER --- */
+header {
+    background: linear-gradient(180deg, #ace5ff 0%, #d1f0ff 100%);
+    padding: 30px 0;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 2.8rem;
+    color: #004a99;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    text-shadow: 2px 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- ESTILO PARA EL ICONO DEL CARRITO FLOTANTE --- */
+.cart-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    padding: 8px 15px;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.3s;
+}
+
+.cart-icon:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+#cart-count {
+    background: #ff4757;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+
+}
+
+/* 1. Definimos el movimiento (la coreografía) */
+@keyframes entradaSuave {
+    from {
+        opacity: 0;            /* Invisible */
+        transform: translateY(20px); /* Un poco más abajo */
+    }
+    to {
+        opacity: 1;            /* Visible */
+        transform: translateY(0);    /* En su sitio original */
+    }
+}
+
+/* 2. Se lo aplicamos a tu título */
+h1 {
+    display: inline-block; /* Necesario para que la animación funcione mejor */
+    animation: entradaSuave 1.2s ease-out forwards; 
+    /* 1.2s es la duración, puedes bajarlo a 0.8s si lo quieres más rápido */
+}
+
+.banner-final {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.banner-img {
+    width: 100%;
+    max-width: 1200px; /* Para que no se estire demasiado en pantallas grandes */
+    height: auto;
+    border-radius: 20px; /* Bordes redondeados */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Sombra elegante */
+    object-fit: cover;
+}
+.hero-info {
+    /* Usamos la misma imagen que tienes arriba */
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+                url('img/banner-bg.jpg'); 
+    background-size: cover;
+    background-position: center;
+    padding: 60px 20px;
+    text-align: center;
+    margin-top: 40px; /* Espacio después de los productos */
+    border-radius: 20px; /* Para que haga juego con tus tarjetas */
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.hero-info h2 {
+    color: #004a99;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.hero-info p {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 5px 0;
+    font-weight: 500;
+}
+.hero-info {
+    position: relative;
+    /* Aquí pones la imagen que quieras de fondo */
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/036/537/416/small_2x/ai-generated-dairy-product-on-blue-backgrounds-photo.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Efecto elegante al hacer scroll */
+    padding: 80px 20px;
+    margin: 40px 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* El recuadro blanco semitransparente para que se lea el texto */
+.info-overlay {
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(5px); /* Desenfoque de fondo */
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.hero-info h2 {
+    color: #004a99;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.hero-info p {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 10px 0;
+    /* --- EFECTO LLUVIA DE ESTRELLAS --- */
+header {
+    position: relative;
+    overflow: hidden; /* Para que las estrellas no se salgan del menú */
+}
+
+.stars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Para que no interfiera con los clics */
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 10px white; /* Brillo de la estrella */
+    animation: rain-stars 3s linear infinite;
+}
+
+}
+
+/* --- CONFIGURACIÓN DEL HEADER --- */
+header {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #ace5ff 0%, #d1f0ff 100%);
+    padding: 30px 0;
+}
+
+/* Contenedor que ocupa todo el header */
+.nieve-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Se queda al fondo */
+    pointer-events: none;
+}
+
+/* Estilo de cada copo/estrella */
+.copo {
+    position: absolute;
+    top: -10px;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px white; /* Brillo para que se vea */
+    animation: caer lineal infinite;
+}
+
+/* Burbuja de notificación */
+.notificacion-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #004a99;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+    animation: slideInRight 0.5s ease-out;
+}
+
+/* Animación de entrada */
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Animación de salida */
+.fadeOut {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.notificacion-popup {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #004a99; /* El azul de tu marca */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 10000;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+/* Botón de borrar dentro del carrito */
+.btn-delete-item {
+    background-color: #ff4d4d; /* Rojo */
+    color: white;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    margin-left: 10px;
+}
+
+.btn-delete-item:hover {
+    background-color: #cc0000;
+    transform: scale(1.1);
+}
+
+.search-container {
+    text-align: center;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 500px;
+}
+
+#product-search {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 2px solid #ace5ff;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+#product-search:focus {
+    border-color: #007bff;
+    box-shadow: 0 4px 12px rgba(0,123,255,0.2);
+}
+
+
+/*/*
+/* Alineación del buscador con el botón */
+.search-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 700px;
+    padding: 0 20px;
+}
+
+.btn-more-categories {
+    background-color: #004a99;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-more-categories:hover {
+    background-color: #003366;
+    transform: scale(1.05);
+}
+
+/* Estilo para el Menú Extra (Ropa, etc.) */
+.extra-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    z-index: 4000;
+    display: none; /* Escondido por defecto */
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.extra-menu.active {
+    display: flex;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.extra-menu-header {
+    background: #f4f9ff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.extra-menu-body {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.category-card {
+    background: #f8fbff;
+    border: 1px solid #eef2f7;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.category-card:hover {
+    border-color: #007bff;
+    background: #eef7ff;
+}
+
+.category-card span {
+    font-size: 2rem;
+}
