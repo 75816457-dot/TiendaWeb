@@ -663,76 +663,98 @@ header {
 }
 
 /* ==========================================
-   ADAPTACIÓN PARA CELULARES (RESPONSIVE)
+   AJUSTES FINALES PARA CELULAR (COPIAR DESDE AQUÍ)
    ========================================== */
 
 @media (max-width: 768px) {
-    /* Ajuste del Título Principal */
+    /* 1. Arreglamos el Header para que el título y el carrito no choquen */
+    header {
+        padding: 30px 10px !important;
+    }
+
+    header .container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Título a la izquierda */
+        text-align: left;
+    }
+
     h1 {
-        font-size: 1.8rem; /* Un poco más pequeño para que no se corte */
-        letter-spacing: 1px;
+        font-size: 1.4rem !important; /* Tamaño más pequeño para celular */
+        max-width: 75%; /* Evita que el texto pase por debajo del carrito */
+        margin: 0 !important;
+        line-height: 1.2;
     }
 
-    /* Buscador y Botón de Categorías en vertical */
-    .search-section {
-        flex-direction: column; /* Uno arriba del otro */
-        gap: 10px;
+    .cart-icon {
+        position: absolute !important;
+        right: 15px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 1001;
     }
 
-    #product-search {
-        width: 100%; /* Ocupa todo el ancho */
-    }
 
-    .btn-more-categories {
-        width: 100%;
-        text-align: center;
-    }
-
-    /* Grilla de productos: 2 columnas en lugar de 3 o 4 */
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 15px;
+    /* 2. Mejoramos la legibilidad del texto sobre la imagen azul */
+    .hero h2 {
+        font-size: 1.5rem !important;
+        background: rgba(255, 255, 255, 0.8); /* Fondo blanco suave */
+        color: #003366 !important;
         padding: 10px;
+        border-radius: 10px;
+        display: inline-block;
     }
 
-    /* Ajuste de las tarjetas de producto */
-    .product-card {
-        min-height: 380px; /* Reducimos la altura mínima para celular */
-        padding: 10px;
-    }
-
-    .product-card img {
-        height: 140px; /* Imagen un poco más pequeña */
-    }
-
-    .product-card h3 {
+    .hero p {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 5px;
+        border-radius: 5px;
+        display: inline-block;
         font-size: 0.9rem;
     }
 
-    /* El Carrito ahora ocupa casi toda la pantalla */
+    /* 3. Ajuste de la Grilla de Productos (2 por fila) */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        padding: 15px !important;
+    }
+
+
+    .product-card {
+        min-height: 350px !important; /* Altura ajustada para que no sean tan largos */
+        padding: 10px !important;
+    }
+
+    .product-card img {
+        height: 130px !important; /* Imagen más pequeña en celular */
+    }
+
+    .product-card h3 {
+        font-size: 0.85rem !important;
+    }
+
+    /* 4. Buscador y Botón de Categorías */
+    .search-section {
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 0 15px !important;
+    }
+
+    #product-search, .btn-more-categories {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* 5. Carrito lateral a pantalla completa */
     .cart-sidebar {
-        width: 85%; 
-    }
-
-    /* El banner de información final */
-    .hero-info {
-        margin: 20px 10px;
-        padding: 40px 15px;
-    }
-
-    .hero-info h2 {
-        font-size: 1.5rem;
-    }
-
-    /* El menú extra de categorías */
-    .extra-menu-body {
-        grid-template-columns: 1fr; /* Una categoría por fila para que sea fácil tocar */
+        width: 100% !important;
     }
 }
 
-/* Ajuste para celulares muy pequeños (ej. iPhone SE) */
-@media (max-width: 480px) {
+/* Ajuste para pantallas mini */
+@media (max-width: 400px) {
     .product-grid {
-        grid-template-columns: 1fr; /* Una sola columna si la pantalla es muy angosta */
+        grid-template-columns: 1fr !important; /* Un solo producto si el celular es muy chico */
     }
 }
