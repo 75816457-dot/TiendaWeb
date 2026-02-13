@@ -661,3 +661,78 @@ header {
 .category-card span {
     font-size: 2rem;
 }
+
+/* ==========================================
+   ADAPTACIÓN PARA CELULARES (RESPONSIVE)
+   ========================================== */
+
+@media (max-width: 768px) {
+    /* Ajuste del Título Principal */
+    h1 {
+        font-size: 1.8rem; /* Un poco más pequeño para que no se corte */
+        letter-spacing: 1px;
+    }
+
+    /* Buscador y Botón de Categorías en vertical */
+    .search-section {
+        flex-direction: column; /* Uno arriba del otro */
+        gap: 10px;
+    }
+
+    #product-search {
+        width: 100%; /* Ocupa todo el ancho */
+    }
+
+    .btn-more-categories {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Grilla de productos: 2 columnas en lugar de 3 o 4 */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px;
+        padding: 10px;
+    }
+
+    /* Ajuste de las tarjetas de producto */
+    .product-card {
+        min-height: 380px; /* Reducimos la altura mínima para celular */
+        padding: 10px;
+    }
+
+    .product-card img {
+        height: 140px; /* Imagen un poco más pequeña */
+    }
+
+    .product-card h3 {
+        font-size: 0.9rem;
+    }
+
+    /* El Carrito ahora ocupa casi toda la pantalla */
+    .cart-sidebar {
+        width: 85%; 
+    }
+
+    /* El banner de información final */
+    .hero-info {
+        margin: 20px 10px;
+        padding: 40px 15px;
+    }
+
+    .hero-info h2 {
+        font-size: 1.5rem;
+    }
+
+    /* El menú extra de categorías */
+    .extra-menu-body {
+        grid-template-columns: 1fr; /* Una categoría por fila para que sea fácil tocar */
+    }
+}
+
+/* Ajuste para celulares muy pequeños (ej. iPhone SE) */
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* Una sola columna si la pantalla es muy angosta */
+    }
+}
